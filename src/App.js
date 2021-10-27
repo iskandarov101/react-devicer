@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
 
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {useState} from 'react';
+
+import Servislar from "./pages/Servislar/Servislar";
+import Company from "./pages/Compony/Compony";
+import Portfolio from "./pages/Portfolio/Portfolio";
+
+import Header from './container/Header/Header';
+// import Sidebar from './container/Sidebar/Sidebar';
+
+import './assets/styles/main.scss'
 function App() {
+
+  const [sidebarState, setSidebarState ] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header isOpened={sidebarState} sidebarState={sidebarState} setSidebarState={setSidebarState} />
+      {/* <Sidebar  /> */}
+      <Switch>
+        <Route exact path='/' component={Servislar} />
+        <Route path='/compony' component={Company} />
+        <Route path='/portfolio' component={Portfolio} />
+      </Switch>
+    </Router>
+
   );
 }
 
